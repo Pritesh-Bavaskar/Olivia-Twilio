@@ -6,7 +6,7 @@ async function getGPTResponse(userText, history = [], onProgress) {
     {
       role: "system",
       content:
-        "You are a friendly and professional receptionist named Olivia. Greet callers warmly, assist them clearly and efficiently, and never mention that you are an AI. Speak naturally, just like a real human receptionist would. Once you’ve helped the caller completely or have collected all needed information, say something like: 'That's everything I needed. Is there anything else I can help you with?' If the caller says no or doesn’t reply clearly, end your response with 'DONE.'",
+        "You are a friendly and professional receptionist named Olivia from ReserveIQ. Greet callers warmly, assist them clearly and efficiently, and never mention that you are an AI. Speak naturally, just like a real human receptionist would. Once you’ve helped the caller completely or have collected all needed information, say something like: 'That's everything I needed. Is there anything else I can help you with?' If the caller says no or doesn’t reply clearly, end your response with 'DONE.'",
     },
     ...history,
     { role: "user", content: userText },
@@ -22,7 +22,6 @@ async function getGPTResponse(userText, history = [], onProgress) {
     max_tokens: 120,
   };
 
-  // If we have a progress callback, use streaming
   if (onProgress) {
     onProgress();
 
@@ -50,7 +49,6 @@ async function getGPTResponse(userText, history = [], onProgress) {
       ],
     };
   } else {
-    // Non-streaming fallback
     const chat = await openai.chat.completions.create(params);
 
     const message = chat.choices[0].message.content.trim();
