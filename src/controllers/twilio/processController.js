@@ -21,6 +21,7 @@ exports.handleProcess = async (req, res) => {
       maxLength: 10,
       trim: "trim-silence",
       playBeep: true,
+      recordingChannels: "mono",
     });
     return res.type("text/xml").send(twiml.toString());
   }
@@ -45,6 +46,7 @@ exports.handleProcess = async (req, res) => {
         maxLength: 10,
         trim: "trim-silence",
         playBeep: true,
+        recordingChannels: "mono",
       });
       sessionMap.set(callSid, {
         history: gptResult.history,

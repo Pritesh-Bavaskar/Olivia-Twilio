@@ -25,7 +25,7 @@ exports.handleVoicemailDecision = async (req, res) => {
 
     const tempPath = path.join(
       os.tmpdir(),
-      `voicemail-decision-${Date.now()}.mp3`
+      `voicemail-decision-${Date.now()}.wav`
     );
     fs.writeFileSync(tempPath, response.data);
 
@@ -56,6 +56,7 @@ exports.handleVoicemailDecision = async (req, res) => {
         maxLength: 10,
         trim: "trim-silence",
         playBeep: true,
+        recordingChannels: "mono",
       });
     }
 
@@ -81,6 +82,7 @@ exports.handleTwilioVoicemail = (req, res) => {
     action: "/voicemail-saved",
     trim: "trim-silence",
     playBeep: true,
+    recordingChannels: "mono",
   });
 
   res.type("text/xml").send(twiml.toString());

@@ -30,7 +30,7 @@ exports.handleRecording = async (req, res) => {
       },
     });
 
-    const tempPath = path.join(os.tmpdir(), `recording-${Date.now()}.mp3`);
+    const tempPath = path.join(os.tmpdir(), `recording-${Date.now()}.wav`);
     fs.writeFileSync(tempPath, response.data);
 
     const transcription = await openai.audio.transcriptions.create({
@@ -67,6 +67,7 @@ exports.handleRecording = async (req, res) => {
           maxLength: 5,
           trim: "trim-silence",
           playBeep: true,
+          recordingChannels: "mono",
         });
         return res.type("text/xml").send(twiml.toString());
       }
@@ -84,6 +85,7 @@ exports.handleRecording = async (req, res) => {
         maxLength: 10,
         trim: "trim-silence",
         playBeep: true,
+        recordingChannels: "mono",
       });
       return res.type("text/xml").send(twiml.toString());
     }

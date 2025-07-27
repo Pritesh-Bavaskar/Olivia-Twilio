@@ -14,6 +14,7 @@ exports.handleTwilioWebhook = (req, res) => {
     maxLength: 10,
     trim: "trim-silence",
     playBeep: true,
+    recordingChannels: "mono",
   });
 
   res.type("text/xml").send(twiml.toString());
