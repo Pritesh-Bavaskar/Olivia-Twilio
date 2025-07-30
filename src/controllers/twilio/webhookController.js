@@ -4,7 +4,11 @@ exports.handleTwilioWebhook = (req, res) => {
   console.log("✅ Received call from Twilio");
   const twiml = new VoiceResponse();
 
-  twiml.say("Hi, this is Olivia from ReserveIQ. I just wanted to follow up on your demo with us. Are you available for a quick moment to confirm everything went smoothly?", {
+  twiml.say( `<speak>
+     <prosody rate="medium" pitch="+1st">
+       Hi there! <break time="300ms"/> This is Olivia from ReserveIQ. <break time="400ms"/> How can I help you today?
+     </prosody>
+   </speak>`, {
     voice: "Polly.Joanna",
   });
 
